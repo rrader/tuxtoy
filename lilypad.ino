@@ -5,7 +5,7 @@
 #define PIN_VIBRO 5
 
 const int ALARM_MAX = 3;  // cycles
-int alarm;
+int alarm = 0;
 Servo servo;
 
 void setup() {
@@ -15,12 +15,18 @@ void setup() {
 }
 
 void loop() {
+  digitalWrite(PIN_LED, HIGH);
+  delay(200);
+  digitalWrite(PIN_LED, LOW);
+  delay(200);
   if (alarm > 0) {
     alarm --;
+    digitalWrite(PIN_LED, HIGH);
     servo.write(50);
-    delay(300);
+    delay(500);
+    digitalWrite(PIN_LED, LOW);
     servo.write(0);
-    delay(300);
+    delay(500);
   } else {
     int val = digitalRead(PIN_VIBRO);
     if (val == HIGH && alarm == 0) {
